@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Gabriel Bellamy — Full-Stack Engineer based in San Francisco, California. Building clean, functional web experiences." />
+  <title>Gabriel Bellamy — Full-Stack Engineer</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Lora:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ========== SKIP TO CONTENT ========== -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Primary navigation">
+    <div class="nav__logo" aria-label="Gabriel Bellamy — home">GB<span class="accent" aria-hidden="true">.</span></div>
+    <ul class="nav__links" id="navLinks" role="list">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+      &#9776;
+    </button>
+  </nav>
+
+  <!-- ========== MAIN CONTENT ========== -->
+
+  <main id="main-content">
+
+    <!-- ========== Author ========== -->
+    <section class="hero" id="home" aria-labelledby="hero-heading">
+      <div class="hero__grid-bg" aria-hidden="true"></div>
+      <div class="hero__content">
+        <p class="hero__eyebrow">Hello, I'm</p>
+        <h1 class="hero__name" id="hero-heading">Gabriel Bellamy<span class="accent" aria-hidden="true">.</span></h1>
+        <p class="hero__role">Full-Stack Engineer</p>
+        <p class="hero__tagline">
+          I build clean, functional web experiences — from backend logic to pixel-perfect interfaces.
+        </p>
+        <div class="hero__cta">
+          <a href="#projects" class="btn btn--primary">View My Work</a>
+          <a href="#contact" class="btn btn--outline">Get In Touch</a>
+        </div>
+      </div>
+      <div class="hero__terminal" aria-hidden="true">
+        <div class="terminal__bar">
+          <span class="dot dot--red"></span>
+          <span class="dot dot--yellow"></span>
+          <span class="dot dot--green"></span>
+          <span class="terminal__title">~/portfolio</span>
+        </div>
+        <div class="terminal__body">
+          <p><span class="t-dim">$</span> whoami</p>
+          <p class="t-accent">full-stack-engineer</p>
+          <p><span class="t-dim">$</span> skills --list</p>
+          <p class="t-dim">loading...</p>
+          <p class="t-accent">HTML · CSS · JavaScript</p>
+          <p class="t-accent">React · Node.js · SQL</p>
+          <p><span class="t-dim">$</span> git status</p>
+          <p class="t-accent">ready to build something great<span class="cursor">_</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section class="section about" id="about" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="section__number" aria-hidden="true">01</span>
+          <h2 class="section__title" id="about-heading">About Me</h2>
+        </div>
+        <div class="about__grid">
+          <div class="about__photo-wrap reveal">
+            <div class="about__profile photo" role="img" aria-label="Profile photo">
+              <img alt="An image about me" src="assets/me.jpeg">
+            </div>
+          </div>
+          <div class="about__text reveal">
+            <p>
+              Hi! I'm a Full-Stack Engineer based in <strong>San Francisco, California</strong>, recently graduated from the Codecademy Full-Stack Engineer bootcamp.
+            </p>
+            <p>I combine 10+ years of experience in customer operations and quality assurance.My background in large corporate environments (Movistar, Orange, Iberdrola) strengthened my problem-solving, process optimization and teamwork abilities.
+            </p>
+            <p>
+             I am particularly interested in Web development and building scalable, interactive web applications. Open to other fields.
+Based in Berkeley, CA and actively seeking opportunities in the Bay Area or remotly.
+            </p>
+            <!--<a href="assets/your-resume.pdf"
+               class="btn btn--outline"
+               target="_blank"
+               rel="noopener noreferrer"
+               aria-label="Download Gabriel Bellamy's resume (opens in new tab)">
+              Download Resume
+            </a>-->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SKILLS ========== -->
+    <section class="section skills" id="skills" aria-labelledby="skills-heading">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="section__number" aria-hidden="true">02</span>
+          <h2 class="section__title" id="skills-heading">Skills</h2>
+        </div>
+        <div class="skills__grid">
+
+          <div class="skill-card reveal">
+            <h3 class="skill-card__title">Frontend</h3>
+            <ul class="skill-card__list" role="list" aria-label="Frontend skills">
+              <li>HTML5</li>
+              <li>CSS3</li>
+              <li>JavaScript (ES6+)</li>
+              <li>React</li>
+              <li>Responsive Design</li>
+            </ul>
+          </div>
+
+          <div class="skill-card reveal">
+            <h3 class="skill-card__title">Backend</h3>
+            <ul class="skill-card__list" role="list" aria-label="Backend skills">
+              <li>Node.js</li>
+              <li>Express</li>
+              <li>REST APIs</li>
+              <li>SQL / PostgreSQL</li>
+              <li>Authentication (JWT)</li>
+            </ul>
+          </div>
+
+          <div class="skill-card reveal">
+            <h3 class="skill-card__title">Tools & Workflow</h3>
+            <ul class="skill-card__list" role="list" aria-label="Tools and workflow skills">
+              <li>Git & GitHub</li>
+              <li>VS Code</li>
+              <li>Command Line</li>
+              <li>npm / yarn</li>
+              <li>Postman</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PROJECTS ========== -->
+    <section class="section projects" id="projects" aria-labelledby="projects-heading">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="section__number" aria-hidden="true">03</span>
+          <h2 class="section__title" id="projects-heading">Projects</h2>
+        </div>
+        <div class="projects__grid">
+
+          <article class="project-card reveal" aria-labelledby="project1-title">
+            <div class="project-card__image">
+              <img class="project-card__img-placeholder" role="img" aria-label="Project screenshot placeholder" src="assets/diamond-lab-team.jpg">
+            </div>
+            <div class="project-card__content">
+              <div class="project-card__tags" aria-label="Technologies used">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+              </div>
+              <h3 class="project-card__title" id="project1-title">IGI-UC Berkeley Diamond Lab Website</h3>
+                <p class="project-card__desc">
+                Responsive website developed for the Diamond Lab at UC Berkeley, focused on presenting research, team information, and resources through a clean and accessible interface.
+                </p>
+              <div class="project-card__links">
+                <a href="https://github.com/gbielbellamy/diamondLab"
+                   class="btn btn--sm"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="View Your Project Name on GitHub (opens in new tab)">
+                  GitHub
+                </a>
+                <a href="https://diamondlab.bio/"
+                   class="btn btn--sm btn--outline"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="View live demo of Your Project Name (opens in new tab)">
+                  Live
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal" aria-labelledby="project1-title">
+            <div class="project-card__image">
+              <img class="project-card__img-placeholder" role="img" aria-label="Project screenshot placeholder" src="assets/my_message.png">
+            </div>
+            <div class="project-card__content">
+              <div class="project-card__tags" aria-label="Technologies used">
+                <span class="tag">CLI</span>
+                <span class="tag">Javascript</span>
+                <span class="tag">Node.js</span>
+              </div>
+              <h3 class="project-card__title" id="project1-title">CLI Galactic Message Generator</h3>
+                <p class="project-card__desc">
+                  Node.js command-line application that creates unique galactic messages using randomized data and modular JavaScript logic.
+                </p>
+              <div class="project-card__links">
+                <a href="https://github.com/gbielbellamy/message-generator"
+                   class="btn btn--sm"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="View Your Project Name on GitHub (opens in new tab)">
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal" aria-labelledby="project1-title">
+            <div class="project-card__image">
+              <img class="project-card__img-placeholder" role="img" aria-label="Project screenshot placeholder" src="assets/api-rest.png">
+            </div>
+            <div class="project-card__content">
+              <div class="project-card__tags" aria-label="Technologies used">
+                <span class="tag">Javascript</span>
+                <span class="tag">Node.js</span>
+                <span class="tag">Express</span>
+                <span class="tag">PostgreSQL</span>
+              </div>
+              <h3 class="project-card__title" id="project1-title">REST API</h3>
+              <p class="project-card__desc">
+                REST API for task management built with Node.js, Express, and PostgreSQL.
+                It implements full CRUD operations using a modular architecture (routes/controllers/db) with persistent storage in a relational database.
+              </p>
+              <div class="project-card__links">
+                <a href="https://github.com/gbielbellamy/task-manager-api"
+                   class="btn btn--sm"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="View Your Project Name on GitHub (opens in new tab)">
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card project-card--coming reveal" aria-label="Next project — coming soon">
+            <div class="project-card__content project-card__content--centered">
+              <p class="t-accent">Coming Soon</p>
+              <h3 class="project-card__title">Next Project</h3>
+              <p class="project-card__desc">Currently in the works. Check back soon!</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section class="section contact" id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="section__number" aria-hidden="true">04</span>
+          <h2 class="section__title" id="contact-heading">Get In Touch</h2>
+        </div>
+        <div class="contact__body reveal">
+          <p class="contact__text">
+            I'm currently open to new opportunities. Whether you have a question, a project idea, or just want to say hi — my inbox is always open.
+          </p>
+          <a href="mailto:gbielbellamy@gmail.com"
+             class="btn btn--primary btn--lg"
+             aria-label="Send an email to Gabriel Bellamy">
+            Say Hello
+          </a>
+          <div class="contact__links">
+            <a href="https://github.com/gbielbellamy"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="contact__link"
+               aria-label="Visit Gabriel Bellamy's GitHub profile (opens in new tab)">
+              GitHub
+            </a>
+            <span class="contact__sep" aria-hidden="true">/</span>
+            <a href="https://linkedin.com/in/gbielbellamy"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="contact__link"
+               aria-label="Visit Gabriel Bellamy's LinkedIn profile (opens in new tab)">
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" role="contentinfo">
+    <p>Designed & Built by <span class="accent">Gabriel Bellamy</span> &nbsp;·&nbsp; <span id="year"></span></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

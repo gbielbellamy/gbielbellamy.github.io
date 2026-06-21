@@ -1,0 +1,49 @@
+# ===========================
+# macOS system files
+# ===========================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# ===========================
+# VS Code settings
+# ===========================
+.vscode/
+
+# ===========================
+# Dependencies
+# ===========================
+node_modules/
+
+# ===========================
+# Environment variables
+# ===========================
+.env
+.env.local
+.env.production
+
+# ===========================
+# Build output
+# ===========================
+dist/
+build/
+
+# ===========================
+# Logs
+# ===========================
+*.log
+npm-debug.log*
+
+# ===========================
+# OS general
+# ===========================
+Thumbs.db
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
