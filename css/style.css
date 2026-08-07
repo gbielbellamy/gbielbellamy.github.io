@@ -1,0 +1,1951 @@
+/* ==========================================================================
+   Gabriel Bellamy — single stylesheet
+   --------------------------------------------------------------------------
+   Contents:
+     1.  Design tokens (color, type, space, shadows)
+     2.  Reset and base
+     3.  Typography
+     4.  Layout utilities
+     5.  Entrance animations
+     6.  Components: buttons, tags, pills
+     7.  Navigation
+     8.  Hero
+     9.  Featured project (browser frame)
+    10.  Work grid
+    11.  Stack / capabilities
+    12.  About
+    13.  Contact and footer
+    14.  Case study page
+    15.  Responsive
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. DESIGN TOKENS
+   --------------------------------------------------------------------------
+   Every color goes through a variable. The theme is switched by setting
+   data-theme="light" | "dark" on <html>. When the visitor has not picked a
+   theme, the system preference wins via prefers-color-scheme.
+   ========================================================================== */
+
+:root {
+  /* --- Type ------------------------------------------------------------- */
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* --- Spacing (4px scale) ---------------------------------------------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* --- Radii ------------------------------------------------------------ */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-full: 999px;
+
+  /* --- Widths ----------------------------------------------------------- */
+  --container: 1120px;
+  --container-narrow: 720px;
+
+  /* --- Motion ----------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur: 280ms;
+  --dur-slow: 620ms;
+}
+
+/* --- Dark theme (default) ----------------------------------------------- */
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #0c0c0e;
+  --bg-elev: #131317;
+  --bg-elev-2: #1a1a20;
+  --bg-inset: #08080a;
+
+  --text: #f2f2f3;
+  --text-2: #a5a5ad;
+  --text-3: #6d6d77;
+
+  --border: #25252c;
+  --border-2: #35353e;
+
+  --accent: #ff6a3d;
+  --accent-hover: #ff8560;
+  --accent-soft: rgba(255, 106, 61, 0.12);
+  --accent-line: rgba(255, 106, 61, 0.3);
+  --on-accent: #150f0c;
+
+  --ok: #4ade80;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px -8px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 32px 64px -24px rgba(0, 0, 0, 0.75);
+
+  --grid-line: rgba(255, 255, 255, 0.04);
+}
+
+/* --- Light theme ---------------------------------------------------------
+   Warm parchment rather than plain white: the page has a colour of its own,
+   and the vermillion accent sits on it without shouting. */
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: #f4eee3;
+  --bg-elev: #fcf8f0;
+  --bg-elev-2: #eae2d2;
+  --bg-inset: #e1d8c5;
+
+  --text: #26201a;
+  --text-2: #5c5346;
+  --text-3: #877d6d;
+
+  --border: #ded5c2;
+  --border-2: #cabea8;
+
+  --accent: #b93d0c;
+  --accent-hover: #93300a;
+  --accent-soft: rgba(194, 65, 12, 0.10);
+  --accent-line: rgba(194, 65, 12, 0.28);
+  --on-accent: #fffaf5;
+
+  --ok: #15803d;
+
+  --shadow-sm: 0 1px 2px rgba(52, 42, 28, 0.07);
+  --shadow-md: 0 8px 24px -10px rgba(52, 42, 28, 0.18);
+  --shadow-lg: 0 32px 64px -28px rgba(52, 42, 28, 0.26);
+
+  --grid-line: rgba(38, 32, 26, 0.07);
+}
+
+/* No explicit choice yet: follow the operating system. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
+
+    --bg: #f4eee3;
+    --bg-elev: #fcf8f0;
+    --bg-elev-2: #eae2d2;
+    --bg-inset: #e1d8c5;
+
+    --text: #26201a;
+    --text-2: #5c5346;
+    --text-3: #877d6d;
+
+    --border: #ded5c2;
+    --border-2: #cabea8;
+
+    --accent: #b93d0c;
+    --accent-hover: #93300a;
+    --accent-soft: rgba(194, 65, 12, 0.10);
+    --accent-line: rgba(194, 65, 12, 0.28);
+    --on-accent: #fffaf5;
+
+    --ok: #15803d;
+
+    --shadow-sm: 0 1px 2px rgba(52, 42, 28, 0.07);
+    --shadow-md: 0 8px 24px -10px rgba(52, 42, 28, 0.18);
+    --shadow-lg: 0 32px 64px -28px rgba(52, 42, 28, 0.26);
+
+    --grid-line: rgba(38, 32, 26, 0.07);
+  }
+}
+
+
+/* ==========================================================================
+   2. RESET AND BASE
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  /* Keep anchor targets clear of the fixed navigation bar. */
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.65;
+  font-feature-settings: 'cv02', 'cv03', 'cv04';
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color var(--dur) var(--ease-out),
+              color var(--dur) var(--ease-out);
+}
+
+img,
+svg,
+picture {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* One consistent focus ring across the whole site. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+.skip-link {
+  position: fixed;
+  top: -6rem;
+  left: var(--space-4);
+  z-index: 200;
+  padding: var(--space-3) var(--space-6);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  border-radius: var(--radius-sm);
+  transition: top var(--dur) var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  top: var(--space-4);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* ==========================================================================
+   3. TYPOGRAPHY
+   ========================================================================== */
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+/* Small label that opens each section. */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.section-label::before {
+  content: '';
+  width: 2.5rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.section-title {
+  font-size: clamp(3rem, 8vw, 5.75rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  margin-bottom: var(--space-6);
+}
+
+.section-intro {
+  max-width: 52ch;
+  color: var(--text-2);
+  font-size: 1.05rem;
+}
+
+
+/* ==========================================================================
+   4. LAYOUT UTILITIES
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+.section {
+  padding-block: var(--space-24);
+  position: relative;
+}
+
+.section--tinted {
+  background: var(--bg-elev);
+  border-block: 1px solid var(--border);
+}
+
+.section-head {
+  margin-bottom: var(--space-16);
+}
+
+
+/* ==========================================================================
+   5. ENTRANCE ANIMATIONS
+   --------------------------------------------------------------------------
+   .reveal starts offset and transparent; main.js adds .is-visible once the
+   element scrolls into view. --reveal-delay staggers siblings.
+   ========================================================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-slow) var(--ease-out),
+              transform var(--dur-slow) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero entrance: runs on load, no scrolling required. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise var(--dur-slow) var(--ease-out) both;
+  animation-delay: var(--rise-delay, 0ms);
+}
+
+/* Reduced motion: everything is visible, nothing travels. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* ==========================================================================
+   6. BUTTONS, TAGS AND PILLS
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.7rem 1.35rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Icons sit inside buttons and scale with the label. */
+.btn__icon {
+  width: 1.05em;
+  height: 1.05em;
+  flex: none;
+}
+
+.btn__arrow {
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.btn:hover .btn__arrow {
+  transform: translateX(3px);
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.btn--primary:hover {
+  background: var(--accent-hover);
+}
+
+.btn--outline {
+  border-color: var(--border-2);
+  color: var(--text);
+}
+
+.btn--outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.btn--ghost {
+  color: var(--text-2);
+  padding-inline: 0.5rem;
+}
+
+.btn--ghost:hover {
+  color: var(--accent);
+}
+
+.btn--sm {
+  padding: 0.45rem 1rem;
+  font-size: 0.82rem;
+}
+
+.btn--lg {
+  padding: 0.9rem 1.9rem;
+  font-size: 1rem;
+}
+
+/* For actions that do not exist yet, such as an undeployed demo. */
+.btn--disabled {
+  border: 1px dashed var(--border-2);
+  color: var(--text-3);
+  cursor: not-allowed;
+}
+
+.btn--disabled:hover {
+  transform: none;
+}
+
+/* Technology tags. */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--bg-elev-2);
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+/* Technology chips with their brand mark. Each item carries its own colour
+   in --tech; the label stays in the theme's text colour so it always reads. */
+.tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.tech {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.22rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--bg-elev-2);
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  white-space: nowrap;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+
+.tech svg {
+  width: 12px;
+  height: 12px;
+  flex: none;
+  color: var(--tech);
+}
+
+.tech:hover {
+  border-color: var(--tech);
+  color: var(--text);
+}
+
+/* Spoken languages, each with its flag. */
+.flag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.flag-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.22rem 0.6rem 0.22rem 0.35rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--bg-elev-2);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  white-space: nowrap;
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+
+.flag-item:hover {
+  border-color: var(--border-2);
+}
+
+.flag {
+  width: 17px;
+  height: 12px;
+  flex: none;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.14) inset;
+}
+
+.flag-level {
+  color: var(--text-3);
+}
+
+/* The glyph carries the brand colour; the label stays in theme colour. */
+.tag svg {
+  width: 12px;
+  height: 12px;
+  flex: none;
+  color: var(--tech, currentColor);
+}
+
+/* Icon-only chips, used on the project cards where labels would crowd. */
+.tag--icon-only {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  justify-content: center;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+
+.tag--icon-only svg {
+  width: 19px;
+  height: 19px;
+}
+
+.tag--icon-only:hover {
+  border-color: var(--tech, var(--border-2));
+  transform: translateY(-2px);
+}
+
+/* Status pill: available, archived, in progress… */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.3rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--bg-elev);
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+.pill__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 60%, transparent);
+  animation: pulse 2.4s var(--ease-out) infinite;
+}
+
+@keyframes pulse {
+  70% {
+    box-shadow: 0 0 0 7px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+.pill--muted .pill__dot {
+  background: var(--text-3);
+  animation: none;
+}
+
+
+/* ==========================================================================
+   7. NAVIGATION
+   ========================================================================== */
+
+/* Reading progress bar pinned to the top edge. */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 120;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  will-change: transform;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 110;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  border-bottom: 1px solid transparent;
+  transition: background-color var(--dur) var(--ease-out),
+              border-color var(--dur) var(--ease-out),
+              padding var(--dur) var(--ease-out);
+}
+
+/* main.js adds .is-scrolled once the page moves: the bar earns its background. */
+.nav.is-scrolled {
+  padding-block: var(--space-3);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  border-bottom-color: var(--border);
+}
+
+.nav__brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1px;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.nav__brand:hover {
+  color: var(--accent);
+}
+
+.nav__menu {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.nav__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-full);
+  color: var(--text);
+  font-size: 1.12rem;
+  font-weight: 500;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+/* The mark carries the colour at rest, so the menu is never just grey text. */
+.nav__icon {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  /* Set here rather than per icon: CSS beats the presentation attribute, so
+     the whole menu's weight is one number in one place. */
+  stroke-width: 2.6;
+  color: var(--accent);
+  opacity: 0.75;
+  transition: opacity var(--dur-fast) var(--ease-out),
+              transform var(--dur) var(--ease-out);
+}
+
+.nav__link:hover .nav__icon,
+.nav__link.is-active .nav__icon {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+/* Underline grows on hover and stays put on the section in view. */
+.nav__link::after {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 0.15rem;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.nav__link:hover::after,
+.nav__link.is-active::after {
+  transform: scaleX(1);
+}
+
+.nav__link:hover,
+.nav__link.is-active {
+  color: var(--accent);
+}
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.icon-btn {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  color: var(--text-2);
+  background: var(--bg-elev);
+  transition: color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out);
+}
+
+.icon-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.icon-btn svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* Theme button shows the icon for the theme you would switch to. */
+.theme-toggle .icon-moon {
+  display: none;
+}
+
+:root[data-theme='light'] .theme-toggle .icon-moon {
+  display: block;
+}
+
+:root[data-theme='light'] .theme-toggle .icon-sun {
+  display: none;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .theme-toggle .icon-moon {
+    display: block;
+  }
+  :root:not([data-theme]) .theme-toggle .icon-sun {
+    display: none;
+  }
+}
+
+.nav__burger {
+  display: none;
+}
+
+
+/* ==========================================================================
+   8. HERO
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  padding-block: var(--space-32) var(--space-24);
+  overflow: hidden;
+}
+
+/* Two background layers: a faint grid plus a glow that drifts with the pointer. */
+.hero__grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 35%, #000 30%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 35%, #000 30%, transparent 78%);
+  pointer-events: none;
+}
+
+.hero__glow {
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  width: min(900px, 110vw);
+  aspect-ratio: 1;
+  translate: -50% 0;
+  background: radial-gradient(circle, var(--accent-soft) 0%, transparent 62%);
+  filter: blur(20px);
+  pointer-events: none;
+  /* main.js writes --mx / --my as the pointer moves. */
+  transform: translate3d(calc(var(--mx, 0) * 26px), calc(var(--my, 0) * 26px), 0);
+  transition: transform 600ms var(--ease-out);
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.hero__eyebrow {
+  margin-bottom: var(--space-6);
+}
+
+.hero__title {
+  font-size: clamp(2.5rem, 5.4vw, 4.25rem);
+  line-height: 1.02;
+  margin-bottom: var(--space-6);
+}
+
+.hero__title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero__lede {
+  max-width: 46ch;
+  margin-bottom: var(--space-8);
+  color: var(--text-2);
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  line-height: 1.6;
+}
+
+.hero__lede strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+
+.hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  color: var(--text-3);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.hero__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* The address, with the note already on its way: speed lines behind an
+   envelope that drifts forward and resets. */
+.mail-send {
+  width: 68px;
+  height: 25px;
+  flex: none;
+  color: var(--accent);
+  overflow: visible;
+}
+
+.mail-send__trail path {
+  animation: mail-trail 2.6s var(--ease-in-out) infinite;
+}
+
+.mail-send__trail path:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.mail-send__trail path:nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+.mail-send__note {
+  animation: mail-fly 2.6s var(--ease-in-out) infinite;
+}
+
+@keyframes mail-trail {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translateX(-2px);
+  }
+  45% {
+    opacity: 1;
+    transform: translateX(2px);
+  }
+}
+
+@keyframes mail-fly {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  45% {
+    transform: translateX(3px);
+  }
+}
+
+/* Side card: the facts a recruiter scans for, in one place. */
+.hero__card {
+  padding: var(--space-8);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-elev);
+  box-shadow: var(--shadow-md);
+}
+
+.hero__card dl {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.hero__card div {
+  display: grid;
+  gap: 2px;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.hero__card div:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.hero__card dt {
+  color: var(--text-3);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero__card dd {
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+
+/* Scroll hint. */
+.hero__scroll {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  translate: -50% 0;
+  z-index: 1;
+  color: var(--text-3);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  animation: bob 2.6s var(--ease-in-out) infinite;
+}
+
+@keyframes bob {
+  50% {
+    transform: translateY(7px);
+  }
+}
+
+
+/* ==========================================================================
+   9. FEATURED PROJECT
+   ========================================================================== */
+
+.featured {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.featured__body > * + * {
+  margin-top: var(--space-6);
+}
+
+/* Matches the label that opens every other section. */
+.featured__kicker {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.featured__kicker::before {
+  content: '';
+  width: 2.5rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.featured__title {
+  font-size: clamp(2.8rem, 6vw, 4.25rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+
+.featured__desc {
+  color: var(--text-2);
+  font-size: 1.05rem;
+}
+
+/* The engineering decisions that make the project worth a second look. */
+.featured__points {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.featured__points li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  color: var(--text-2);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.featured__points li::before {
+  content: '→';
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+
+.featured__points strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.featured__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+/* --- Browser frame ------------------------------------------------------ */
+.frame {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-elev);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.frame:hover {
+  transform: translateY(-6px);
+}
+
+.frame__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0.65rem var(--space-4);
+  background: var(--bg-elev-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.frame__dots {
+  display: flex;
+  gap: 6px;
+}
+
+.frame__dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border-2);
+}
+
+.frame__url {
+  flex: 1;
+  padding: 0.2rem 0.7rem;
+  border-radius: var(--radius-full);
+  background: var(--bg);
+  color: var(--text-3);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.frame__shot {
+  display: block;
+  width: 100%;
+  /* The width/height attributes are presentational hints on <img>; without
+     height:auto the attribute height would beat aspect-ratio and stretch it. */
+  height: auto;
+  /* Matches the screenshot, cropped to where the app's content actually ends. */
+  aspect-ratio: 1600 / 1544;
+  object-fit: cover;
+  object-position: top center;
+  background: var(--bg-inset);
+}
+
+/* Placeholder used until a real screenshot is available. */
+.frame__pending {
+  display: grid;
+  place-content: center;
+  gap: var(--space-2);
+  aspect-ratio: 16 / 10;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--bg-inset),
+    var(--bg-inset) 12px,
+    var(--bg-elev-2) 12px,
+    var(--bg-elev-2) 24px
+  );
+  color: var(--text-3);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+
+/* ==========================================================================
+   10. WORK GRID
+   ========================================================================== */
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-6);
+}
+
+.work-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-elev);
+  overflow: hidden;
+  transition: border-color var(--dur) var(--ease-out),
+              transform var(--dur) var(--ease-out),
+              box-shadow var(--dur) var(--ease-out);
+}
+
+.work-card:hover {
+  border-color: var(--border-2);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.work-card__media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--bg-inset);
+  border-bottom: 1px solid var(--border);
+}
+
+.work-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.work-card:hover .work-card__media img {
+  transform: scale(1.035);
+}
+
+/* Solid rather than translucent: it sits over a photograph, and a blurred
+   panel was never going to be readable against every one of them. */
+.work-card__badge {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: var(--on-accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  box-shadow: var(--shadow-sm);
+}
+
+.work-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: var(--space-3);
+  padding: var(--space-6);
+}
+
+.work-card__title {
+  font-size: 1.3rem;
+}
+
+.work-card__desc {
+  flex: 1;
+  color: var(--text-2);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.work-card__role {
+  color: var(--text-3);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.work-card__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+
+/* ==========================================================================
+   11. STACK / CAPABILITIES
+   ========================================================================== */
+
+.stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-6);
+}
+
+.stack-card {
+  padding: var(--space-8);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-elev);
+  transition: border-color var(--dur) var(--ease-out),
+              transform var(--dur) var(--ease-out);
+}
+
+.stack-card:hover {
+  border-color: var(--accent-line);
+  transform: translateY(-4px);
+}
+
+.stack-card__icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.stack-card__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.stack-card__title {
+  margin-bottom: var(--space-2);
+  font-size: 1.2rem;
+}
+
+.stack-card__note {
+  margin-bottom: var(--space-4);
+  color: var(--text-2);
+  font-size: 0.9rem;
+}
+
+
+/* ==========================================================================
+   12. ABOUT
+   ========================================================================== */
+
+.about {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+.about__figure {
+  position: sticky;
+  top: 7rem;
+}
+
+.about__figure img {
+  width: 100%;
+  /* Without height:auto the width/height attributes would squash the portrait. */
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.about__prose > * + * {
+  margin-top: var(--space-4);
+}
+
+.about__prose p {
+  color: var(--text-2);
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.about__prose strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* Track record as a vertical line with milestones. */
+.timeline {
+  margin-top: var(--space-8);
+  padding-left: var(--space-6);
+  border-left: 1px solid var(--border);
+  display: grid;
+  gap: var(--space-6);
+}
+
+.timeline li {
+  position: relative;
+}
+
+.timeline li::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--space-6) * -1 - 4px);
+  top: 0.55rem;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.timeline__when {
+  display: block;
+  color: var(--text-3);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+.timeline__what {
+  color: var(--text);
+  font-size: 0.98rem;
+  font-weight: 500;
+}
+
+.timeline__detail {
+  color: var(--text-2);
+  font-size: 0.92rem;
+}
+
+
+/* ==========================================================================
+   13. CONTACT AND FOOTER
+   ========================================================================== */
+
+.contact {
+  text-align: center;
+  max-width: var(--container-narrow);
+  margin-inline: auto;
+}
+
+.contact__title {
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  margin-bottom: var(--space-6);
+}
+
+.contact__text {
+  margin-bottom: var(--space-8);
+  color: var(--text-2);
+  font-size: 1.1rem;
+}
+
+/* Large mail link with an underline that draws itself on hover. */
+.contact__mail {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-8);
+  font-family: var(--font-mono);
+  font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+  color: var(--text);
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  transition: background-size var(--dur) var(--ease-out),
+              color var(--dur) var(--ease-out);
+}
+
+.contact__mail:hover {
+  color: var(--accent);
+  background-size: 100% 2px;
+}
+
+.contact__links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.footer {
+  padding-block: var(--space-8);
+  border-top: 1px solid var(--border);
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  color: var(--text-3);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.footer a:hover {
+  color: var(--accent);
+}
+
+
+/* ==========================================================================
+   14. CASE STUDY PAGE
+   ========================================================================== */
+
+.cs-hero {
+  padding-block: var(--space-32) var(--space-12);
+}
+
+.cs-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-8);
+  padding: 0.55rem 1.2rem 0.55rem 1rem;
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-full);
+  background: var(--bg-elev);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  letter-spacing: 0.04em;
+  transition: color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              background-color var(--dur-fast) var(--ease-out);
+}
+
+.cs-back span {
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.cs-back:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.cs-back:hover span {
+  transform: translateX(-3px);
+}
+
+.cs-title {
+  font-size: clamp(3.2rem, 9vw, 6.5rem);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  margin-bottom: var(--space-6);
+}
+
+.cs-lede {
+  max-width: 58ch;
+  margin-bottom: var(--space-8);
+  color: var(--text-2);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.6;
+}
+
+/* Metadata strip: role, year, stack, status. */
+.cs-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-6);
+  padding-block: var(--space-6);
+  border-block: 1px solid var(--border);
+}
+
+.cs-meta dt {
+  margin-bottom: var(--space-2);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.cs-meta dd {
+  color: var(--text);
+  font-size: 1.1rem;
+  line-height: 1.45;
+}
+
+/* Article body. */
+.prose {
+  max-width: var(--container-narrow);
+  margin-inline: auto;
+}
+
+.prose > * + * {
+  margin-top: var(--space-6);
+}
+
+.prose h2 {
+  margin-top: var(--space-16);
+  font-size: clamp(2.2rem, 5vw, 3.25rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.prose h3 {
+  margin-top: var(--space-8);
+  font-size: 1.45rem;
+}
+
+.prose p,
+.prose li {
+  color: var(--text-2);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.prose strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.prose code {
+  padding: 0.1rem 0.35rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elev-2);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+.prose ul {
+  display: grid;
+  gap: var(--space-3);
+  padding-left: var(--space-6);
+}
+
+.prose ul li {
+  position: relative;
+}
+
+.prose ul li::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--space-4) * -1);
+  top: 0.75em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* --- Screenshots that follow the theme -----------------------------------
+   Every Northstar shot exists twice, captured in the app's own dark and light
+   themes. A dark screenshot on a parchment page glares, so the page shows
+   whichever one matches. Only the visible copy is fetched: the hidden one is
+   display:none, so a lazy image never starts downloading.
+   -------------------------------------------------------------------------- */
+.theme-shot--light {
+  display: none;
+}
+
+:root[data-theme='light'] .theme-shot--light {
+  display: block;
+}
+
+:root[data-theme='light'] .theme-shot--dark {
+  display: none;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .theme-shot--light {
+    display: block;
+  }
+
+  :root:not([data-theme]) .theme-shot--dark {
+    display: none;
+  }
+}
+
+/* --- Bento grid of section shots ----------------------------------------
+   Deliberate placement rather than a uniform grid: the dashboard earns twice
+   the room, and the rest tile in beside it like brickwork. Each tile reveals
+   on scroll with its own delay, so the wall builds rather than appears.
+   ---------------------------------------------------------------------- */
+.bento {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  margin-block: var(--space-12);
+}
+
+.bento__tile {
+  position: relative;
+  /* Same proportions as the screenshots, so nothing is cropped away. */
+  aspect-ratio: 1200 / 870;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-inset);
+  transition: border-color var(--dur) var(--ease-out),
+              transform var(--dur) var(--ease-out),
+              box-shadow var(--dur) var(--ease-out);
+}
+
+.bento__tile:hover {
+  border-color: var(--accent-line);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.bento__tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.bento__tile:hover img {
+  transform: scale(1.03);
+}
+
+/* The caption sits over the shot, on a gradient that keeps it readable. */
+.bento__tile figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: grid;
+  gap: 2px;
+  gap: var(--space-1);
+  padding: var(--space-12) var(--space-4) var(--space-4);
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--bg) 97%, transparent) 0%,
+    color-mix(in srgb, var(--bg) 90%, transparent) 45%,
+    transparent 100%
+  );
+}
+
+.bento__tile figcaption strong {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.bento__tile figcaption span {
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+@media (max-width: 860px) {
+  .bento {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .bento {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Pulled-out decision or lesson. */
+.callout {
+  padding: var(--space-6);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+  border-radius: var(--radius-md);
+  background: var(--bg-elev);
+}
+
+.callout__label {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.callout p {
+  font-size: 0.98rem;
+}
+
+/* Full-width figure inside the article. */
+.cs-figure {
+  max-width: var(--container);
+  margin-inline: auto;
+  margin-block: var(--space-16);
+}
+
+.cs-figure figcaption {
+  margin-top: var(--space-3);
+  color: var(--text-3);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+/* Footer navigation for the case study. */
+.cs-next {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-top: var(--space-24);
+  /* The article ends here, so it needs room before the footer starts. */
+  margin-bottom: var(--space-12);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--border);
+}
+
+
+/* ==========================================================================
+   15. RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 960px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+
+  .hero__card {
+    order: -1;
+  }
+
+  .featured {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .featured__media {
+    order: -1;
+  }
+
+  .about {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .about__figure {
+    position: static;
+    max-width: 260px;
+  }
+}
+
+@media (max-width: 720px) {
+  .section {
+    padding-block: var(--space-16);
+  }
+
+  .nav {
+    padding-inline: var(--space-4);
+  }
+
+  /* On small screens the menu unfolds under the bar. */
+  .nav__burger {
+    display: grid;
+  }
+
+  .nav__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: var(--space-2);
+    background: var(--bg-elev);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+
+    /* Closed state: collapsed and non-interactive. */
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    pointer-events: none;
+    transition: grid-template-rows var(--dur) var(--ease-out),
+                opacity var(--dur) var(--ease-out);
+  }
+
+  .nav__menu.is-open {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav__menu > li {
+    overflow: hidden;
+  }
+
+  .nav__link {
+    display: block;
+    padding: var(--space-3) var(--space-4);
+    font-size: 1.05rem;
+  }
+
+  .nav__link::after {
+    display: none;
+  }
+
+  .hero {
+    padding-block: var(--space-24) var(--space-16);
+  }
+
+  .hero__scroll {
+    display: none;
+  }
+
+  .work-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cs-hero {
+    padding-block: var(--space-24) var(--space-8);
+  }
+
+  .cs-figure {
+    margin-block: var(--space-12);
+  }
+}
