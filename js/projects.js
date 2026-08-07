@@ -76,7 +76,7 @@ const PROJECTS = [
       },
       {
         label: 'GitHub',
-        href: 'https://github.com/gbielbellamy/ai-dashboard-ui',
+        href: 'https://github.com/gbielbellamy/dashboard-UI',
         variant: 'outline'
       }
     ]
