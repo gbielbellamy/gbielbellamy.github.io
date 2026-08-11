@@ -20,8 +20,7 @@
   <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-  <meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#f4eee3" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0c0c0e" />
 
   <!-- Open the font connection before the stylesheet asks for it. -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -31,19 +30,20 @@
   <link rel="stylesheet" href="css/style.css" />
 
   <!--
-    Apply the saved theme before the first paint, so the page never flashes
-    the wrong one. Everything else about the toggle lives in js/main.js.
+    Set the theme before the first paint, so the page never flashes the wrong
+    one. Dark is the default on a first visit; after that the visitor's own
+    choice is remembered. Everything else about the toggle lives in js/main.js.
   -->
   <script>
     (function () {
+      var theme = 'dark';
       try {
         var saved = localStorage.getItem('gb-theme');
-        if (saved === 'light' || saved === 'dark') {
-          document.documentElement.setAttribute('data-theme', saved);
-        }
+        if (saved === 'light' || saved === 'dark') theme = saved;
       } catch (error) {
-        /* Storage unavailable: fall back to the system preference. */
+        /* Storage unavailable: the default stands. */
       }
+      document.documentElement.setAttribute('data-theme', theme);
     })();
   </script>
 </head>
@@ -117,14 +117,13 @@
               See my latest project
               <span class="btn__arrow" aria-hidden="true">→</span>
             </a>
-            <!-- Résumé download is off while the document is being revised. -->
-            <span class="btn btn--disabled btn--lg" aria-disabled="true">
+            <a class="btn btn--outline btn--lg" href="assets/Gabriel_Bellamy_Resume.pdf" target="_blank" rel="noopener noreferrer">
               <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
                 <path d="M14 3v5h5M9 13h6M9 17h4" />
               </svg>
-              Résumé — updating
-            </span>
+              Résumé (PDF)
+            </a>
           </div>
 
           <p class="hero__meta rise" style="--rise-delay: 320ms">
@@ -601,13 +600,13 @@
             </ul>
 
             <p>
-              <span class="btn btn--disabled" aria-disabled="true">
+              <a class="btn btn--outline" href="assets/Gabriel_Bellamy_Resume.pdf" target="_blank" rel="noopener noreferrer">
                 <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
                   <path d="M14 3v5h5M9 13h6M9 17h4" />
                 </svg>
-                Résumé — updating, ask me for a copy
-              </span>
+                Download résumé (PDF)
+              </a>
             </p>
           </div>
         </div>
@@ -656,13 +655,13 @@
               </svg>
               LinkedIn
             </a>
-            <span class="btn btn--disabled" aria-disabled="true">
+            <a class="btn btn--outline" href="assets/Gabriel_Bellamy_Resume.pdf" target="_blank" rel="noopener noreferrer">
               <svg class="btn__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
                 <path d="M14 3v5h5M9 13h6M9 17h4" />
               </svg>
-              Résumé — updating
-            </span>
+              Résumé
+            </a>
           </div>
         </div>
       </div>

@@ -19,8 +19,7 @@
   <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
-  <meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#f4eee3" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0c0c0e" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,14 +29,14 @@
 
   <script>
     (function () {
+      var theme = 'dark';
       try {
         var saved = localStorage.getItem('gb-theme');
-        if (saved === 'light' || saved === 'dark') {
-          document.documentElement.setAttribute('data-theme', saved);
-        }
+        if (saved === 'light' || saved === 'dark') theme = saved;
       } catch (error) {
-        /* Storage unavailable: fall back to the system preference. */
+        /* Storage unavailable: the default stands. */
       }
+      document.documentElement.setAttribute('data-theme', theme);
     })();
   </script>
 </head>
