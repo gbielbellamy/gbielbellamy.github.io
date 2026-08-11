@@ -27,7 +27,7 @@ const PROJECTS = [
     year: 'Nov 2024 to present',
     role: 'Sole developer, brief to deployment',
     summary:
-      'A live site for a genomics research lab at UC Berkeley, twelve pages covering research areas, publications, team profiles and news. I worked directly with the lab\'s principal investigator through iterative reviews, and it scores 100 on Lighthouse for accessibility, best practices and SEO. Still mine to maintain.',
+      'A live site for a genomics research lab at UC Berkeley, twelve pages covering research areas, publications, team profiles and news. I worked directly with the lab\'s principal investigator through iterative reviews, and it scores 100 on Lighthouse for accessibility, best practices and SEO. I still maintain the code, and the lab manager updates content alongside me.',
     tags: ['HTML', 'CSS', 'JavaScript', 'Netlify', 'Accessibility'],
     image: 'assets/diamond-lab-team.jpg',
     alt: 'The Diamond Lab team page, showing a grid of researcher profiles.',
