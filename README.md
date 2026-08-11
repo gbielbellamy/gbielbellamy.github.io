@@ -1,21 +1,21 @@
-# Gabriel Bellamy — Portfolio
+# Gabriel Bellamy, portfolio
 
 My personal site: what I build, how I build it, and how to reach me.
 
 **Live:** https://gbielbellamy.github.io/
 
 This is a personal site, and the repository is public so the work can be looked
-at — the code as much as the pages. It is not a template or a starting point for
+at, the code as much as the pages. It is not a template or a starting point for
 anyone else's site.
 
 No framework, no build step, no dependencies: hand-written HTML, CSS and
 JavaScript you can open by double-clicking. That is a deliberate choice rather
-than a limitation — a portfolio should load instantly on a recruiter's phone,
+than a limitation. A portfolio should load instantly on a recruiter's phone,
 and every line of it should be readable by whoever opens the repository.
 
 ## Running it locally
 
-Open `index.html` in a browser. That's it — the site works straight from the
+Open `index.html` in a browser. That is all: the site works straight from the
 filesystem, with no server and nothing to install.
 
 To serve it over HTTP instead:
@@ -35,10 +35,10 @@ work/
 css/
 └── style.css          Design tokens, components, responsive rules
 js/
-├── projects.js        Project data — the work grid is rendered from this
+├── projects.js        Project data, the source for the work grid
 ├── tech-icons.js      Technology icon registry
 └── main.js            Theme, rendering, scroll behaviour
-assets/                Images, résumé, favicon, social preview
+assets/                Images, resume, favicon, social preview
 └── northstar/         Section screenshots, in both themes
 ```
 
@@ -46,7 +46,7 @@ assets/                Images, résumé, favicon, social preview
 
 **Design tokens.** Every colour, space and duration is a CSS custom property.
 The theme is a single attribute on `<html>`: `data-theme="light" | "dark"`.
-Nothing else in the stylesheet knows a theme exists — the same rules serve both.
+Nothing else in the stylesheet knows a theme exists, so the same rules serve both.
 Visitors who have not chosen get their system preference through
 `prefers-color-scheme`, and an inline script in `<head>` applies the stored
 choice before the first paint, so the page never flashes the wrong theme.
@@ -72,8 +72,8 @@ choice before the first paint, so the page never flashes the wrong theme.
 glyph, and both the static markup and the generated cards read from it. A
 technology therefore looks identical everywhere it appears, and adding one is a
 single line. Brand marks come from the [simple-icons](https://simple-icons.org)
-set; concepts with no logo of their own — REST APIs, accessibility, the command
-line — get a drawn outline instead.
+set. Concepts with no logo of their own, such as REST APIs, accessibility and the
+command line, get a drawn outline instead.
 
 **Screenshots follow the theme.** Each Northstar shot exists twice, captured in
 the app's own dark and light themes, and the page shows whichever matches. This
@@ -115,7 +115,7 @@ Copyright (c) 2026 Gabriel Bellamy. All rights reserved.
 
 This repository is published so the work can be viewed, not to be reused. It is
 not open source: no licence is granted to copy, modify or redistribute the code
-or the content — the written copy, résumé, photographs and screenshots included.
+or the content, including the written copy, resume, photographs and screenshots.
 
 Read it, ask me about any of it, take an idea from it. If you want to use
 something, get in touch. See [LICENSE](./LICENSE).

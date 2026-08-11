@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Gabriel Bellamy — single stylesheet
+   Gabriel Bellamy, single stylesheet
    --------------------------------------------------------------------------
    Contents:
      1.  Design tokens (color, type, space, shadows)
@@ -437,6 +437,33 @@ h4 {
 
 .btn:active {
   transform: translateY(0);
+}
+
+/* --- Icon drawing --------------------------------------------------------
+   The sprite holds geometry only, so the drawing style lives here. Outline
+   icons are stroked; brand marks carry their own fill on the path, which wins
+   over anything inherited, so one rule covers both.
+   -------------------------------------------------------------------------- */
+.nav__icon,
+.icon-btn svg,
+.btn__icon,
+.mail-send,
+.stack-card__icon svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon-btn svg,
+.btn__icon,
+.stack-card__icon svg {
+  stroke-width: 1.8;
+}
+
+.flag {
+  fill: none;
+  stroke: none;
 }
 
 /* Icons sit inside buttons and scale with the label. */

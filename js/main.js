@@ -224,7 +224,7 @@
             href: link.href,
             target: '_blank',
             rel: 'noopener noreferrer',
-            'aria-label': `${link.label} — ${project.title} (opens in a new tab)`
+            'aria-label': `${link.label}, ${project.title} (opens in a new tab)`
           },
           glyph ? [glyph, link.label] : [link.label]
         );
@@ -267,6 +267,23 @@
   }
 
   $$('.stack-card, .featured').forEach(decorateStaticTags);
+
+  /* Chip lists written as data: <ul class="tech-list" data-tech="React, Vite">.
+     Keeping the labels in the markup and the glyphs in the registry means the
+     page never carries icon geometry inline. */
+  $$('.tech-list[data-tech]').forEach((list) => {
+    list
+      .getAttribute('data-tech')
+      .split(',')
+      .map((label) => label.trim())
+      .filter(Boolean)
+      .forEach((label) => {
+        const li = techChip(label, false);
+        li.classList.remove('tag');
+        li.classList.add('tech');
+        list.appendChild(li);
+      });
+  });
 
 
   /* ========================================================================

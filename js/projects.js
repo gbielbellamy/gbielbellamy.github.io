@@ -2,7 +2,7 @@
    Project data
    --------------------------------------------------------------------------
    The work grid is rendered from this array, so adding a project means adding
-   one object here — the markup never has to change.
+   one object here. The markup never has to change.
 
    Loaded as a classic script rather than an ES module on purpose: the site is
    then just as happy opened straight from the filesystem as it is served over
@@ -23,11 +23,11 @@
 const PROJECTS = [
   {
     id: 'diamond-lab',
-    title: 'IGI–UC Berkeley Diamond Lab',
-    year: '2025–2026',
-    role: 'Front-end developer — real client, requirements through deployment',
+    title: 'Diamond Lab, UC Berkeley',
+    year: 'Nov 2024 to present',
+    role: 'Sole developer, brief to deployment',
     summary:
-      'A production website for a research laboratory at UC Berkeley: research areas, publications, team profiles and news across a dozen pages. I took it from stakeholder requirements to a deployed site on Netlify, building responsive layouts for desktop, tablet and mobile on a shared navigation partial and one design-token stylesheet.',
+      'A live site for a genomics research lab at UC Berkeley, twelve pages covering research areas, publications, team profiles and news. I worked directly with the lab\'s principal investigator through iterative reviews, and it scores 100 on Lighthouse for accessibility, best practices and SEO. Still mine to maintain.',
     tags: ['HTML', 'CSS', 'JavaScript', 'Netlify', 'Accessibility'],
     image: 'assets/diamond-lab-team.jpg',
     alt: 'The Diamond Lab team page, showing a grid of researcher profiles.',
@@ -44,9 +44,9 @@ const PROJECTS = [
     id: 'job-tracker',
     title: 'The Application Log',
     year: '2026',
-    role: 'Design and build — solo project',
+    role: 'Design and build, solo project',
     summary:
-      'A job-application tracker with no build step, no dependencies and no backend: open the file and it runs. Tracks status, response rate and follow-ups due, with JSON export/import so the data survives a cleared browser. The interface takes its cues from a paper case file — typewriter headings and ink-stamp status badges.',
+      'A job-application tracker with no build step, no dependencies and no backend: open the file and it runs. Tracks status, response rate and follow-ups due, with JSON export and import so the data survives a cleared browser. The interface takes its cues from a paper case file, with typewriter headings and ink-stamp status badges.',
     tags: ['HTML', 'CSS', 'JavaScript'],
     image: 'assets/job-tracker.png',
     alt: 'The Application Log dashboard, listing job applications with status badges and summary statistics.',
@@ -64,7 +64,7 @@ const PROJECTS = [
     year: '2026',
     role: 'Design system and front-end architecture',
     summary:
-      'A SaaS-style productivity dashboard built to work out a reusable component layer — Card, Button, Badge — sitting under charts, task lists and notes. It did its job: the patterns proven here became the foundation Northstar was built on, and the project was retired rather than duplicated.',
+      'A SaaS-style productivity dashboard built to work out a reusable component layer (Card, Button, Badge) sitting under charts, task lists and notes. It did its job: the patterns proven here became the foundation Northstar was built on, so the project was retired rather than duplicated.',
     tags: ['React', 'TypeScript', 'Vite', 'Zustand', 'Recharts'],
     image: 'assets/ai-dashboard.png',
     alt: 'Dashboard-UI, showing charts, a task widget and a notes panel.',
@@ -85,7 +85,7 @@ const PROJECTS = [
     id: 'message-generator',
     title: 'Galactic Message Generator',
     year: '2026',
-    role: 'Solo project — first Node.js build',
+    role: 'Solo project, first thing I wrote for Node',
     summary:
       'A small Node.js command-line tool that composes a random space-themed mission briefing from separate pools of roles, objectives and locations. Deliberately tiny, and the first thing here written to run outside a browser.',
     tags: ['Node.js', 'CLI', 'JavaScript'],
