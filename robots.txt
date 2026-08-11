@@ -1,0 +1,10 @@
+# The site itself is meant to be found.
+User-agent: *
+Allow: /
+
+# The resume is not. It carries a phone number, and search engines are how
+# scrapers find documents like this one. Anyone visiting the site can still
+# download it from the page; this only keeps it out of search results.
+Disallow: /assets/Gabriel_Bellamy_Resume.pdf
+
+Sitemap: https://gbielbellamy.github.io/sitemap.xml
