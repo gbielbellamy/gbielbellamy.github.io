@@ -296,21 +296,21 @@ h4 {
 .section-label {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  margin-bottom: var(--space-4);
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 0.82rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
 .section-label::before {
   content: '';
-  width: 2.5rem;
-  height: 2px;
-  border-radius: 2px;
+  width: 3.5rem;
+  height: 3px;
+  border-radius: 3px;
   background: var(--accent);
 }
 
@@ -538,20 +538,24 @@ h4 {
   gap: var(--space-2);
 }
 
-.tag {
+.tag,
+.tech {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.2rem 0.65rem;
+  gap: 0.4rem;
+  padding: 0.32rem 0.75rem;
   border: 1px solid var(--border);
   border-radius: var(--radius-full);
   background: var(--bg-elev-2);
-  color: var(--text-2);
+  color: var(--text);
   font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.03em;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
   white-space: nowrap;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
 }
+
 
 /* Technology chips with their brand mark. Each item carries its own colour
    in --tech; the label stays in the theme's text colour so it always reads. */
@@ -562,32 +566,11 @@ h4 {
   margin-top: var(--space-1);
 }
 
-.tech {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.22rem 0.6rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-full);
-  background: var(--bg-elev-2);
-  color: var(--text-2);
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  white-space: nowrap;
-  transition: border-color var(--dur-fast) var(--ease-out),
-              color var(--dur-fast) var(--ease-out);
-}
 
-.tech svg {
-  width: 12px;
-  height: 12px;
-  flex: none;
-  color: var(--tech);
-}
 
+.tag:hover,
 .tech:hover {
-  border-color: var(--tech);
-  color: var(--text);
+  border-color: var(--tech, var(--border-2));
 }
 
 /* Spoken languages, each with its flag. */
@@ -602,13 +585,13 @@ h4 {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.22rem 0.6rem 0.22rem 0.35rem;
+  padding: 0.32rem 0.75rem 0.32rem 0.45rem;
   border: 1px solid var(--border);
   border-radius: var(--radius-full);
   background: var(--bg-elev-2);
   color: var(--text);
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.82rem;
   white-space: nowrap;
   transition: border-color var(--dur-fast) var(--ease-out);
 }
@@ -618,8 +601,8 @@ h4 {
 }
 
 .flag {
-  width: 17px;
-  height: 12px;
+  width: 21px;
+  height: 15px;
   flex: none;
   border-radius: 2px;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.14) inset;
@@ -630,9 +613,10 @@ h4 {
 }
 
 /* The glyph carries the brand colour; the label stays in theme colour. */
-.tag svg {
-  width: 12px;
-  height: 12px;
+.tag svg,
+.tech svg {
+  width: 15px;
+  height: 15px;
   flex: none;
   color: var(--tech, currentColor);
 }
@@ -662,19 +646,20 @@ h4 {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  padding: 0.3rem 0.85rem;
-  border: 1px solid var(--border);
+  padding: 0.5rem 1.15rem;
+  border: 1px solid var(--accent-line);
   border-radius: var(--radius-full);
-  background: var(--bg-elev);
-  color: var(--text-2);
+  background: var(--accent-soft);
+  color: var(--text);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
 }
 
 .pill__dot {
-  width: 7px;
-  height: 7px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   background: var(--ok);
   box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 60%, transparent);
@@ -1039,16 +1024,18 @@ h4 {
 }
 
 .hero__card dt {
-  color: var(--text-3);
+  color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
 .hero__card dd {
   color: var(--text);
-  font-size: 0.95rem;
+  font-size: 1rem;
+  line-height: 1.55;
 }
 
 
@@ -1093,20 +1080,20 @@ h4 {
 .featured__kicker {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-4);
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 0.82rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
 .featured__kicker::before {
   content: '';
-  width: 2.5rem;
-  height: 2px;
-  border-radius: 2px;
+  width: 3.5rem;
+  height: 3px;
+  border-radius: 3px;
   background: var(--accent);
 }
 
@@ -1614,9 +1601,9 @@ h4 {
   margin-bottom: var(--space-2);
   color: var(--accent);
   font-family: var(--font-mono);
-  font-size: 0.82rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
