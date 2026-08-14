@@ -65,7 +65,7 @@ const PROJECTS = [
     role: 'Design system and front-end architecture',
     summary:
       'A SaaS-style productivity dashboard built to work out a reusable component layer (Card, Button, Badge) sitting under charts, task lists and notes. It did its job: the patterns proven here became the foundation Northstar was built on, so the project was retired rather than duplicated.',
-    tags: ['React', 'TypeScript', 'Vite', 'Zustand', 'Recharts'],
+    tags: ['React', 'TypeScript', 'Vite', 'Zustand', 'Recharts', 'Framer Motion'],
     image: 'assets/ai-dashboard.png',
     alt: 'Dashboard-UI, showing charts, a task widget and a notes panel.',
     links: [
