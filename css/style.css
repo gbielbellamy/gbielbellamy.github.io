@@ -98,7 +98,7 @@
 }
 
 /* --- Light theme ---------------------------------------------------------
-   Warm parchment rather than plain white: the page has a colour of its own,
+   Warm parchment rather than plain white: the page has a color of its own,
    and the vermillion accent sits on it without shouting. */
 :root[data-theme='light'] {
   color-scheme: light;
@@ -557,8 +557,8 @@ h4 {
 }
 
 
-/* Technology chips with their brand mark. Each item carries its own colour
-   in --tech; the label stays in the theme's text colour so it always reads. */
+/* Technology chips with their brand mark. Each item carries its own color
+   in --tech; the label stays in the theme's text color so it always reads. */
 .tech-list {
   display: flex;
   flex-wrap: wrap;
@@ -612,7 +612,7 @@ h4 {
   color: var(--text-3);
 }
 
-/* The glyph carries the brand colour; the label stays in theme colour. */
+/* The glyph carries the brand color; the label stays in theme color. */
 .tag svg,
 .tech svg {
   width: 15px;
@@ -759,7 +759,7 @@ h4 {
   transition: color var(--dur-fast) var(--ease-out);
 }
 
-/* The mark carries the colour at rest, so the menu is never just grey text. */
+/* The mark carries the color at rest, so the menu is never just grey text. */
 .nav__icon {
   width: 22px;
   height: 22px;

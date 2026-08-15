@@ -7,7 +7,7 @@
    Each entry is keyed by the label shown on the site:
      d  a filled brand path, taken from the simple-icons set
      s  stroked outline paths, for anything with no brand mark of its own
-     c  the colour the glyph is drawn in
+     c  the color the glyph is drawn in
 
    TECH_ALIASES maps label variants onto a single entry.
    ========================================================================== */

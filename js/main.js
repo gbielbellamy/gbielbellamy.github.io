@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Site behaviour
+   Site behavior
    --------------------------------------------------------------------------
    Everything here is progressive: with JavaScript disabled the page still
    reads and navigates, it just stops animating.

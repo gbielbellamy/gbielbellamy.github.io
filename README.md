@@ -37,14 +37,14 @@ css/
 js/
 ├── projects.js        Project data, the source for the work grid
 ├── tech-icons.js      Technology icon registry
-└── main.js            Theme, rendering, scroll behaviour
+└── main.js            Theme, rendering, scroll behavior
 assets/                Images, resume, favicon, social preview
 └── northstar/         Section screenshots, in both themes
 ```
 
 ## How it works
 
-**Design tokens.** Every colour, space and duration is a CSS custom property.
+**Design tokens.** Every color, space and duration is a CSS custom property.
 The theme is a single attribute on `<html>`: `data-theme="light" | "dark"`.
 Nothing else in the stylesheet knows a theme exists, so the same rules serve both.
 Visitors who have not chosen get their system preference through
@@ -114,7 +114,7 @@ source `main` and the root folder.
 Copyright (c) 2026 Gabriel Bellamy. All rights reserved.
 
 This repository is published so the work can be viewed, not to be reused. It is
-not open source: no licence is granted to copy, modify or redistribute the code
+not open source: no license is granted to copy, modify or redistribute the code
 or the content, including the written copy, resume, photographs and screenshots.
 
 Read it, ask me about any of it, take an idea from it. If you want to use
