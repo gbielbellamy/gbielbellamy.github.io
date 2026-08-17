@@ -52,6 +52,8 @@
   --radius-lg: 16px;
   --radius-xl: 22px;
   --radius-full: 999px;
+  /* Buttons are softened rather than pill-shaped; chips keep --radius-full. */
+  --radius-btn: 10px;
 
   /* --- Widths ----------------------------------------------------------- */
   --container: 1120px;
@@ -423,7 +425,7 @@ h4 {
   gap: var(--space-2);
   padding: 0.7rem 1.35rem;
   border: 1px solid transparent;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-btn);
   font-family: var(--font-sans);
   font-size: 0.9rem;
   font-weight: 500;
@@ -817,7 +819,7 @@ h4 {
   width: 38px;
   height: 38px;
   border: 1px solid var(--border);
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-btn);
   color: var(--text-2);
   background: var(--bg-elev);
   transition: color var(--dur-fast) var(--ease-out),
@@ -1514,7 +1516,7 @@ h4 {
   margin-bottom: var(--space-8);
   padding: 0.55rem 1.2rem 0.55rem 1rem;
   border: 1px solid var(--border-2);
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-btn);
   background: var(--bg-elev);
   color: var(--text);
   font-family: var(--font-mono);
@@ -1722,7 +1724,7 @@ h4 {
   width: 44px;
   height: 44px;
   border: 1px solid var(--border);
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-btn);
   background: var(--bg-elev);
   color: var(--text);
   font-size: 1.6rem;
