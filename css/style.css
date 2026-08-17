@@ -65,28 +65,31 @@
   --dur-slow: 620ms;
 }
 
-/* --- Dark theme (default) ----------------------------------------------- */
+/* --- Dark theme (default) -------------------------------------------------
+   The same slate and indigo as the light theme, inverted. The accent lifts to
+   a paler indigo because #4338ca on a dark ground reads as a bruise, not a
+   button: it scores 2.4 against this background, well under the 4.5 needed. */
 :root,
 :root[data-theme='dark'] {
   color-scheme: dark;
 
-  --bg: #0c0c0e;
-  --bg-elev: #131317;
-  --bg-elev-2: #1a1a20;
-  --bg-inset: #08080a;
+  --bg: #0e1117;
+  --bg-elev: #161a23;
+  --bg-elev-2: #1d222d;
+  --bg-inset: #090b10;
 
-  --text: #f2f2f3;
-  --text-2: #a5a5ad;
-  --text-3: #6d6d77;
+  --text: #eef1f5;
+  --text-2: #a2abb9;
+  --text-3: #6e7887;
 
-  --border: #25252c;
-  --border-2: #35353e;
+  --border: #252b36;
+  --border-2: #353d4b;
 
-  --accent: #ff6a3d;
-  --accent-hover: #ff8560;
-  --accent-soft: rgba(255, 106, 61, 0.12);
-  --accent-line: rgba(255, 106, 61, 0.3);
-  --on-accent: #150f0c;
+  --accent: #818cf8;
+  --accent-hover: #a5b4fc;
+  --accent-soft: rgba(129, 140, 248, 0.14);
+  --accent-line: rgba(129, 140, 248, 0.32);
+  --on-accent: #0e1117;
 
   --ok: #4ade80;
 
@@ -94,7 +97,7 @@
   --shadow-md: 0 8px 24px -8px rgba(0, 0, 0, 0.6);
   --shadow-lg: 0 32px 64px -24px rgba(0, 0, 0, 0.75);
 
-  --grid-line: rgba(255, 255, 255, 0.04);
+  --grid-line: rgba(238, 241, 245, 0.05);
 }
 
 /* --- Light theme ---------------------------------------------------------
@@ -447,7 +450,7 @@ h4 {
 .nav__icon,
 .icon-btn svg,
 .btn__icon,
-.mail-send,
+.mail-icon,
 .stack-card__icon svg {
   fill: none;
   stroke: currentColor;
@@ -949,52 +952,16 @@ h4 {
   gap: var(--space-2);
 }
 
-/* The address, with the note already on its way: speed lines behind an
-   envelope that drifts forward and resets. */
-.mail-send {
-  width: 68px;
-  height: 25px;
+/* A plain envelope beside the address. */
+.mail-icon {
+  width: 26px;
+  height: 26px;
   flex: none;
   color: var(--accent);
-  overflow: visible;
-}
-
-.mail-send__trail path {
-  animation: mail-trail 2.6s var(--ease-in-out) infinite;
-}
-
-.mail-send__trail path:nth-child(2) {
-  animation-delay: 0.12s;
-}
-
-.mail-send__trail path:nth-child(3) {
-  animation-delay: 0.24s;
-}
-
-.mail-send__note {
-  animation: mail-fly 2.6s var(--ease-in-out) infinite;
-}
-
-@keyframes mail-trail {
-  0%,
-  100% {
-    opacity: 0.25;
-    transform: translateX(-2px);
-  }
-  45% {
-    opacity: 1;
-    transform: translateX(2px);
-  }
-}
-
-@keyframes mail-fly {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  45% {
-    transform: translateX(3px);
-  }
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+  fill: none;
 }
 
 /* Side card: the facts a recruiter scans for, in one place. */
