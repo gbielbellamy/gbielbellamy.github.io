@@ -13,6 +13,7 @@
      6. Reading progress
      7. Hero pointer parallax
      8. Footer year
+     9. Image lightbox
    ========================================================================== */
 
 (function () {
@@ -428,6 +429,86 @@
     hero.addEventListener('pointerleave', () => {
       hero.style.setProperty('--mx', '0');
       hero.style.setProperty('--my', '0');
+    });
+  }
+
+
+  /* ========================================================================
+     9. IMAGE LIGHTBOX
+     ------------------------------------------------------------------------
+     Screenshots are detailed, and at tile size the detail is lost. Clicking
+     one opens it full size over the page. Built here rather than in the
+     markup because it is an enhancement: without JavaScript the images are
+     still there, just not expandable.
+     ======================================================================== */
+
+  const zoomable = $$('.frame__shot, .bento__tile img');
+
+  if (zoomable.length) {
+    const figure = el('img', { class: 'lightbox__image', alt: '' });
+    const caption = el('p', { class: 'lightbox__caption' });
+    const closeBtn = el('button', {
+      class: 'lightbox__close',
+      type: 'button',
+      'aria-label': 'Close image'
+    });
+    closeBtn.textContent = '\u00d7';
+
+    const lightbox = el(
+      'div',
+      {
+        class: 'lightbox',
+        role: 'dialog',
+        'aria-modal': 'true',
+        'aria-label': 'Expanded screenshot',
+        hidden: 'hidden'
+      },
+      [closeBtn, figure, caption]
+    );
+    document.body.appendChild(lightbox);
+
+    let lastFocused = null;
+
+    function openLightbox(img) {
+      /* The visible copy is the one that matches the current theme. */
+      figure.src = img.currentSrc || img.src;
+      figure.alt = img.alt || '';
+      const label = img.closest('figure')?.querySelector('figcaption strong');
+      caption.textContent = label ? label.textContent : img.alt || '';
+      lastFocused = document.activeElement;
+      lightbox.hidden = false;
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.hidden = true;
+      document.body.style.overflow = '';
+      figure.removeAttribute('src');
+      if (lastFocused) lastFocused.focus();
+    }
+
+    zoomable.forEach((img) => {
+      img.classList.add('is-zoomable');
+      img.setAttribute('role', 'button');
+      img.setAttribute('tabindex', '0');
+      img.title = 'Click to expand';
+
+      img.addEventListener('click', () => openLightbox(img));
+      img.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openLightbox(img);
+        }
+      });
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !lightbox.hidden) closeLightbox();
     });
   }
 

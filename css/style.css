@@ -1697,6 +1697,78 @@ h4 {
 }
 
 
+/* --- Lightbox -------------------------------------------------------------
+   Screenshots open full size over the page. The trigger styling lives on the
+   image itself so it is obvious the thing is clickable.
+   -------------------------------------------------------------------------- */
+.is-zoomable {
+  cursor: zoom-in;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  gap: var(--space-4);
+  padding: var(--space-8);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: lightbox-in var(--dur) var(--ease-out);
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.lightbox__image {
+  max-width: min(1400px, 96vw);
+  max-height: 84vh;
+  width: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  cursor: zoom-out;
+}
+
+.lightbox__caption {
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.lightbox__close {
+  position: absolute;
+  top: var(--space-6);
+  right: var(--space-6);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--bg-elev);
+  color: var(--text);
+  font-size: 1.6rem;
+  line-height: 1;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+
+.lightbox__close:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 /* --- Bento grid of section shots ----------------------------------------
    Deliberate placement rather than a uniform grid: the dashboard earns twice
    the room, and the rest tile in beside it like brickwork. Each tile reveals

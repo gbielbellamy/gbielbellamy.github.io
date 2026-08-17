@@ -346,7 +346,7 @@
             <p class="featured__desc">
               A single workspace for running a career transition: plan the day, ship the
               project, track the search, and see whether any of it is working. Nine
-              sections, one domain model, and no backend at all yet.
+              sections, one domain model, and a full stack behind it.
             </p>
 
             <ul class="featured__points">
@@ -361,8 +361,9 @@
                 they can be reasoned about, and tested, on their own.</span>
               </li>
               <li>
-                <span><strong>Versioned local state.</strong> A new seed plan can ship
-                without overwriting a single thing the user recorded themselves.</span>
+                <span><strong>A real backend.</strong> Five serverless functions over
+                Prisma and PostgreSQL, with accounts, bcrypt-hashed passwords and a
+                session in an HttpOnly cookie.</span>
               </li>
               <li>
                 <span><strong>A design system with a live catalog.</strong> Tokens,
@@ -370,10 +371,9 @@
                 properties.</span>
               </li>
               <li>
-                <span><strong>In progress.</strong> The front end is live and usable
-                today, with state kept in the browser. Next is a PostgreSQL database
-                behind it, plus accounts, login and the security work that comes with
-                them.</span>
+                <span><strong>Tested where it counts.</strong> 110 unit tests over the
+                pure-logic layer: the pacing, the funnel maths and the date handling
+                that everything else depends on.</span>
               </li>
             </ul>
 
@@ -383,6 +383,9 @@
               <li class="tag">Vite</li>
               <li class="tag">Zustand</li>
               <li class="tag">Recharts</li>
+              <li class="tag">Prisma</li>
+              <li class="tag">PostgreSQL</li>
+              <li class="tag">Vitest</li>
             </ul>
 
             <div class="featured__actions">
@@ -464,8 +467,8 @@
             </div>
             <h3 class="stack-card__title">Front-end</h3>
             <p class="stack-card__note">
-              What I have actually built with. Everything in the work section below
-              uses some of it.
+              What I have actually built with. Northstar is the fullest example, and
+              everything in the work section below uses some of it.
             </p>
             <ul class="tag-list">
               <li class="tag">React</li>
@@ -482,22 +485,25 @@
             <div class="stack-card__icon" aria-hidden="true">
               <svg aria-hidden="true"><use href="#i-database" /></svg>
             </div>
-            <h3 class="stack-card__title">Full-stack fundamentals</h3>
+            <h3 class="stack-card__title">Back end and data</h3>
             <p class="stack-card__note">
-              Node I have used, for a command-line tool rather than a server. The rest
-              comes from the Codecademy program and has not been in a project of my
-              own yet.
+              Shipped in Northstar: an API on serverless functions, Prisma over
+              PostgreSQL, accounts with hashed passwords and signed session cookies.
+              Express and Playwright are from the Codecademy program, not from a
+              project of mine.
             </p>
             <ul class="tag-list">
               <li class="tag">Node.js</li>
-              <li class="tag">Express</li>
+              <li class="tag">Serverless functions</li>
               <li class="tag">REST APIs</li>
+              <li class="tag">Prisma</li>
               <li class="tag">PostgreSQL</li>
               <li class="tag">SQL</li>
-              <li class="tag">JWT auth</li>
-              <li class="tag">Postman</li>
+              <li class="tag">Auth and sessions</li>
               <li class="tag">Vitest</li>
+              <li class="tag">Express</li>
               <li class="tag">Playwright</li>
+              <li class="tag">Postman</li>
             </ul>
           </article>
 

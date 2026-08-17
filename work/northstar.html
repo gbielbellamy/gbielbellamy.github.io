@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Northstar, a case study | Gabriel Bellamy</title>
-  <meta name="description" content="How Northstar was built: a nine-section career-operations workspace in React and TypeScript, with elastic scheduling, versioned local state and logic kept out of the components." />
+  <meta name="description" content="How Northstar was built: a nine-section career workspace in React and TypeScript, on serverless functions, Prisma and PostgreSQL, with elastic scheduling and logic kept out of the components." />
   <meta name="author" content="Gabriel Bellamy" />
   <link rel="canonical" href="https://gbielbellamy.github.io/work/northstar.html" />
 
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://gbielbellamy.github.io/work/northstar.html" />
   <meta property="og:title" content="Northstar, a case study" />
-  <meta property="og:description" content="A nine-section career-operations workspace in React and TypeScript. Elastic scheduling, versioned local state, and logic kept out of the components." />
+  <meta property="og:description" content="A nine-section career workspace in React, TypeScript, Prisma and PostgreSQL. Elastic scheduling, session cookies, and logic kept out of the components." />
   <meta property="og:image" content="https://gbielbellamy.github.io/assets/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -145,8 +145,8 @@
           <p class="cs-lede">
             A single workspace for running a career transition: plan the day, ship the
             project, track the search, and see whether any of it is working. Nine
-            sections, one domain model, and not a single network request yet. The front
-            end is live and usable today.
+            sections, one domain model, and a full stack behind it: React on the front,
+            serverless functions, Prisma and PostgreSQL on the back.
           </p>
 
           <dl class="cs-meta">
@@ -156,15 +156,15 @@
             </div>
             <div>
               <dt>Year</dt>
-              <dd>2026, ongoing</dd>
+              <dd>2026</dd>
             </div>
             <div>
               <dt>Stack</dt>
-              <dd>React 19, TypeScript, Vite, Zustand, Recharts</dd>
+              <dd>React 19, TypeScript, Vite, Zustand, Recharts, Prisma, PostgreSQL</dd>
             </div>
             <div>
               <dt>Status</dt>
-              <dd>Front end live on Vercel. Database, accounts and login in progress.</dd>
+              <dd>Live on Vercel with accounts, a database and 110 passing tests.</dd>
             </div>
           </dl>
         </div>
@@ -230,7 +230,7 @@
                    width="1200" height="870" loading="lazy" decoding="async" />
               <figcaption>
                 <strong>Dashboard</strong>
-                <span>The funnel against your own targets, today’s blocks, and where the week’s hours went.</span>
+                <span>The funnel against your own targets, today’s blocks, and where the week’s hours went. Export a backup, restore one, or delete the account.</span>
               </figcaption>
             </figure>
             <figure class="bento__tile reveal" style="--reveal-delay: 70ms">
@@ -254,7 +254,7 @@
                    width="1200" height="870" loading="lazy" decoding="async" />
               <figcaption>
                 <strong>Roadmap</strong>
-                <span>Ten weeks, each with a theme, a definition of done and per-area goals.</span>
+                <span>Weeks, each with a theme, a definition of done and per-area goals.</span>
               </figcaption>
             </figure>
             <figure class="bento__tile reveal" style="--reveal-delay: 210ms">
@@ -341,19 +341,26 @@
           </p>
           <p>
             <code>types/</code> defines the domain and nothing imports upward from it.
-            <code>data/seed.ts</code> is a single object matching that shape.
-            <code>store/</code> holds all state and persists it. <code>lib/</code> is
-            pure logic: plain functions, no React, no store access. Pages read from the
-            store, call into <code>lib/</code> for anything computed, and render
-            components. Nothing in <code>components/</code> reaches into the store;
-            data arrives as props.
+            <code>store/</code> holds a copy of the account so the interface stays
+            instant. <code>lib/</code> is pure logic: plain functions, no React, no
+            store access. Pages read from the store, call into <code>lib/</code> for
+            anything computed, and render components. Nothing in
+            <code>components/</code> reaches into the store; data arrives as props.
           </p>
           <p>
-            That last constraint is the one that pays off. Because no component can
-            fetch its own state, every component is trivially reusable and the
-            Components page can render the whole system in isolation. And because
-            scheduling and funnel maths live in <code>lib/</code>, they can be reasoned
-            about without mounting a single React tree.
+            Behind that sit five serverless functions. One reads the whole account in a
+            single request, one handles registration and sessions, one writes rows in
+            any collection, one covers settings and reviews, and one prunes abandoned
+            guest accounts. Prisma owns the schema, and the migrations are versioned so
+            the database rebuilds from scratch on any machine.
+          </p>
+          <p>
+            That last constraint on components is the one that pays off. Because no
+            component can fetch its own state, every component is trivially reusable and
+            the Components page can render the whole system in isolation. And because
+            scheduling and funnel maths live in <code>lib/</code>, they can be tested
+            without mounting a single React tree. There are <strong>110 unit
+            tests</strong> over exactly that layer.
           </p>
 
           <h2>Three decisions worth explaining</h2>
@@ -375,13 +382,12 @@
           <div class="callout">
             <span class="callout__label">Decision 02. Versioned plan, untouched history</span>
             <p>
-              Everything persists to <code>localStorage</code>, which raises an awkward
-              question: what happens when the app ships a better roadmap to someone who
-              already has data? The store merges on load using a
-              <code>planVersion</code> field. The plan (roadmap, goals, schedule, skill
-              paths) is replaced when the seed moves ahead, while anything the user
-              recorded themselves is left alone. Shipping an improved plan never costs
-              anyone their history.
+              A planner that ships an improved roadmap has an awkward question to answer:
+              what happens to someone who already has data? The plan carries a
+              <code>planVersion</code>, and the plan itself, the roadmap, goals,
+              schedule and skill paths, is replaced when that number moves ahead.
+              Anything the person recorded themselves is left alone. Shipping a better
+              plan never costs anyone their history.
             </p>
           </div>
 
@@ -393,51 +399,85 @@
               landing on the wrong day for anyone west of Greenwich. There is exactly
               one definition of today and one local-midnight parser, both in
               <code>lib/dates.ts</code>, and nothing else is allowed to construct a
-              date. For the same reason the dev port is pinned in
-              <code>vite.config.ts</code>, because <code>localStorage</code> is scoped to the
-              origin, so a moving port would mean a moving data store.
+              date. It is the single most tested file in the project.
             </p>
           </div>
 
-          <h2>Why it started local</h2>
+          <h2>Going from local to a real backend</h2>
           <p>
-            Starting with a server would have been the more impressive-sounding choice
-            and the wrong first move. A backend brings accounts, authentication, a
-            privacy story and a hosting bill with it, all of which are real work, and
-            none of which would have told me whether the <em>product</em> was any good.
-            Keeping everything in the browser meant the questions that actually decided
-            that, pacing, merging and the funnel model, got the time instead.
+            The first version kept everything in <code>localStorage</code>. That was
+            deliberate: a backend brings accounts, sessions, a privacy story and a
+            hosting bill with it, and none of that would have told me whether the
+            product was any good. Keeping it local meant the questions that actually
+            decided that, the pacing, the merging, the funnel model, got the time
+            instead.
           </p>
           <p>
-            The cost is real, and the app says so plainly: data is per browser and per
-            device, and clearing site data erases it. That is why JSON export and import
-            sit on the Dashboard rather than buried in a settings page.
+            Once those were answered the constraint became the problem: data lived in
+            one browser on one machine, and clearing site data erased it. So the second
+            half of the project was replacing that with something real, without
+            rewriting the half that already worked.
           </p>
           <p>
-            It is also why that constraint is now the thing to lift. The pure-function
-            layer was built so the source of the data could change without the logic
-            changing with it, and that is exactly what happens next.
+            The pure-function layer is what made that possible. Because
+            <code>lib/</code> never knew where the data came from, swapping
+            <code>localStorage</code> for an API meant adding one module,
+            <code>lib/api.ts</code>, and pointing the store at it. The scheduling logic
+            did not change at all.
           </p>
+
+          <h2>Three more, once there was a server</h2>
+
+          <div class="callout">
+            <span class="callout__label">Decision 04. Writes that do not lie</span>
+            <p>
+              Every change is applied locally first and sent afterwards, so the
+              interface never waits on the network. The risk with that pattern is the
+              screen showing something that was never saved. So a failed write says so
+              and reloads from the server, rather than leaving you with a version of
+              your data that only exists on your screen.
+            </p>
+          </div>
+
+          <div class="callout">
+            <span class="callout__label">Decision 05. The session</span>
+            <p>
+              The session is a signed token in an <code>HttpOnly</code>,
+              <code>Secure</code>, <code>SameSite=Lax</code> cookie: no script can read
+              it and no other site can borrow it. Passwords are hashed with bcrypt.
+              Every write is scoped by the session's user as well as by row id, so a
+              guessed id matches nothing that is not yours.
+            </p>
+          </div>
+
+          <div class="callout">
+            <span class="callout__label">Decision 06. Deletion as a property of the schema</span>
+            <p>
+              Deleting an account deletes everything in it, and that happens because the
+              schema cascades rather than because some function remembers to tidy up.
+              Erasure that depends on code being called is erasure that eventually is
+              not. The demo accounts are pruned on a schedule by the same route.
+            </p>
+          </div>
 
           <h2>What's next</h2>
           <p>
-            The front end is <a href="https://northstar-project-ruby.vercel.app/" target="_blank" rel="noopener noreferrer">live on Vercel</a>
-            and usable today. The current work is the other half of it:
+            The app is finished in the sense that matters: it is deployed, it has
+            accounts, and I use it every day to run my own search. What I would pick up
+            next is not features.
           </p>
           <ul>
             <li>
-              <strong>A PostgreSQL database</strong> behind the app, so the plan and the
-              history stop living in one browser on one machine.
+              End-to-end tests over the flows that unit tests cannot reach, starting
+              with registration and the guest path.
             </li>
             <li>
-              <strong>Accounts and login</strong>, with the security work that has to
-              come with them: hashed credentials, protected routes, sessions that
-              expire.
+              Rate limiting on the auth routes, which is the obvious gap in a
+              public sign-up form.
             </li>
             <li>
-              <strong>Tests</strong> around <code>lib/pacing.ts</code> and the
-              selectors. The pure functions were written to be testable and deserve
-              the tests.
+              A second pair of eyes on the schema. It has never been reviewed by anyone
+              but me, and that is the part I would most like to be wrong about.
             </li>
           </ul>
 
