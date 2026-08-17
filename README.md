@@ -85,6 +85,13 @@ hidden copy is `display: none` and lazy-loaded, so it is never downloaded.
 ES modules are blocked by CORS on `file://`, and the site should work when
 opened directly from disk, not just when served.
 
+## Updating the resume
+
+The PDF in `assets/` is a copy, so replacing the source file elsewhere does not
+change what the site serves. Copy the new file over it, then bump the `?v=` date
+on the three links in `index.html`. Browsers cache PDFs hard, and without a new
+query string a returning visitor keeps the old one.
+
 ## Accessibility
 
 - Skip link, one visible focus ring, and landmarks throughout.
