@@ -98,36 +98,36 @@
 }
 
 /* --- Light theme ---------------------------------------------------------
-   Warm parchment rather than plain white: the page has a color of its own,
-   and the vermillion accent sits on it without shouting. */
+   Cool slate rather than plain white, with an indigo accent. The page keeps a
+   color of its own without the warmth reading as beige. */
 :root[data-theme='light'] {
   color-scheme: light;
 
-  --bg: #f4eee3;
-  --bg-elev: #fcf8f0;
-  --bg-elev-2: #eae2d2;
-  --bg-inset: #e1d8c5;
+  --bg: #eef1f5;
+  --bg-elev: #ffffff;
+  --bg-elev-2: #e6eaf0;
+  --bg-inset: #dde3ea;
 
-  --text: #26201a;
-  --text-2: #5c5346;
-  --text-3: #877d6d;
+  --text: #161a20;
+  --text-2: #4a5261;
+  --text-3: #78818f;
 
-  --border: #ded5c2;
-  --border-2: #cabea8;
+  --border: #d8dde5;
+  --border-2: #c3c9d4;
 
-  --accent: #b93d0c;
-  --accent-hover: #93300a;
-  --accent-soft: rgba(194, 65, 12, 0.10);
-  --accent-line: rgba(194, 65, 12, 0.28);
-  --on-accent: #fffaf5;
+  --accent: #4338ca;
+  --accent-hover: #362fa8;
+  --accent-soft: rgba(67, 56, 202, 0.09);
+  --accent-line: rgba(67, 56, 202, 0.28);
+  --on-accent: #ffffff;
 
   --ok: #15803d;
 
-  --shadow-sm: 0 1px 2px rgba(52, 42, 28, 0.07);
-  --shadow-md: 0 8px 24px -10px rgba(52, 42, 28, 0.18);
-  --shadow-lg: 0 32px 64px -28px rgba(52, 42, 28, 0.26);
+  --shadow-sm: 0 1px 2px rgba(22, 26, 32, 0.06);
+  --shadow-md: 0 8px 24px -10px rgba(22, 26, 32, 0.16);
+  --shadow-lg: 0 32px 64px -28px rgba(22, 26, 32, 0.24);
 
-  --grid-line: rgba(38, 32, 26, 0.07);
+  --grid-line: rgba(22, 26, 32, 0.06);
 }
 
 /* Kept for reference only: an inline script in <head> always sets data-theme,
@@ -136,31 +136,31 @@
   :root:not([data-theme]) {
     color-scheme: light;
 
-    --bg: #f4eee3;
-    --bg-elev: #fcf8f0;
-    --bg-elev-2: #eae2d2;
-    --bg-inset: #e1d8c5;
+    --bg: #eef1f5;
+    --bg-elev: #ffffff;
+    --bg-elev-2: #e6eaf0;
+    --bg-inset: #dde3ea;
 
-    --text: #26201a;
-    --text-2: #5c5346;
-    --text-3: #877d6d;
+    --text: #161a20;
+    --text-2: #4a5261;
+    --text-3: #78818f;
 
-    --border: #ded5c2;
-    --border-2: #cabea8;
+    --border: #d8dde5;
+    --border-2: #c3c9d4;
 
-    --accent: #b93d0c;
-    --accent-hover: #93300a;
-    --accent-soft: rgba(194, 65, 12, 0.10);
-    --accent-line: rgba(194, 65, 12, 0.28);
-    --on-accent: #fffaf5;
+    --accent: #4338ca;
+    --accent-hover: #362fa8;
+    --accent-soft: rgba(67, 56, 202, 0.09);
+    --accent-line: rgba(67, 56, 202, 0.28);
+    --on-accent: #ffffff;
 
     --ok: #15803d;
 
-    --shadow-sm: 0 1px 2px rgba(52, 42, 28, 0.07);
-    --shadow-md: 0 8px 24px -10px rgba(52, 42, 28, 0.18);
-    --shadow-lg: 0 32px 64px -28px rgba(52, 42, 28, 0.26);
+    --shadow-sm: 0 1px 2px rgba(22, 26, 32, 0.06);
+    --shadow-md: 0 8px 24px -10px rgba(22, 26, 32, 0.16);
+    --shadow-lg: 0 32px 64px -28px rgba(22, 26, 32, 0.24);
 
-    --grid-line: rgba(38, 32, 26, 0.07);
+    --grid-line: rgba(22, 26, 32, 0.06);
   }
 }
 
