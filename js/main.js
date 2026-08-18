@@ -91,7 +91,8 @@
     if (!entry) return null;
 
     const svg = document.createElementNS(SVG_NS, 'svg');
-    svg.setAttribute('viewBox', '0 0 24 24');
+    /* Most marks are drawn on a 24-unit grid, but not all of them. */
+    svg.setAttribute('viewBox', entry.vb || '0 0 24 24');
     svg.setAttribute('aria-hidden', 'true');
 
     if (entry.d) {
